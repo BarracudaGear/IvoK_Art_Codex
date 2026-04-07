@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Content Editor - IVO</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Jost:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="editor-page">
+    <main class="editor-shell">
+      <section class="editor-intro">
+        <p class="page-label">Content Editor</p>
+        <h1>Update the site without editing the code</h1>
+        <p>
+          Add your images to the <code>images/</code> folder, fill in the fields below, and download a fresh
+          <code>site-data.js</code> file when you are ready.
+        </p>
+        <div class="editor-note-list">
+          <p>1. Save the hero image and artist portrait inside <code>images/</code>.</p>
+          <p>2. Add or remove works under each category.</p>
+          <p>3. Click <strong>Download site-data.js</strong>.</p>
+          <p>4. Replace <code>js/site-data.js</code> with the downloaded file.</p>
+        </div>
+        <a class="button button-secondary" href="index.html">Back to website</a>
+      </section>
+
+      <form id="content-editor" class="editor-form">
+        <div data-editor-root></div>
+        <div class="editor-actions">
+          <button type="submit" class="button">Download site-data.js</button>
+        </div>
+      </form>
+    </main>
+
+    <script src="js/site-data.js"></script>
+    <script src="js/editor.js"></script>
+  </body>
+</html>
