@@ -23,6 +23,16 @@ Inside the editor, image paths should look like:
 
 ## Works
 
+Public categories are:
+
+- Portraits
+- Landscapes
+- Interior Murals
+- Exterior Murals
+- Faux Finishes
+
+Leave a category empty until real artwork is ready. The live gallery shows an honest empty state instead of placeholder paintings.
+
 Each work includes:
 
 - title
