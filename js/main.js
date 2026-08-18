@@ -67,7 +67,7 @@ function prepareSiteData(data) {
 }
 
 function brandName(data) {
-  return data.site.shortName || data.site.artistName;
+  return data.site.artistName;
 }
 
 function hasEmail(value) {
@@ -98,7 +98,6 @@ function renderHeader(data, page) {
     <div class="container site-header-inner">
       <a class="site-brand" href="index.html" aria-label="Back to homepage">
         <span class="site-brand-name">${escapeHtml(brandName(data))}</span>
-        <span class="site-brand-role">${escapeHtml(data.site.role)}</span>
       </a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
       <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
@@ -385,6 +384,26 @@ function initUpdateForm() {
   if (nextField) {
     nextField.value = new URL("update.html?sent=1", window.location.href).href;
   }
+
+  form.addEventListener("submit", function () {
+    const subjectField = form.querySelector('[name="_subject"]');
+    if (!subjectField) {
+      return;
+    }
+
+    const categoryField = form.elements.namedItem("artwork_category");
+    const sectionField = form.elements.namedItem("section");
+    const category = categoryField && String(categoryField.value || "").trim();
+    const section = sectionField && String(sectionField.value || "").trim();
+
+    if (category) {
+      subjectField.value = "IvoK " + category;
+    } else if (section) {
+      subjectField.value = "IvoK " + section;
+    } else {
+      subjectField.value = "IvoK studio update";
+    }
+  });
 
   const params = new URLSearchParams(window.location.search);
   if (params.get("sent") === "1" && thanks) {
