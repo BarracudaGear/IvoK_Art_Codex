@@ -51,10 +51,12 @@
         <section class="editor-panel">
           <p class="card-label">Site Basics</p>
           ${renderField("Artist name", "site.artistName", editorState.site.artistName)}
+          ${renderField("Short name", "site.shortName", editorState.site.shortName)}
           ${renderField("Role", "site.role", editorState.site.role)}
           ${renderField("Email", "site.email", editorState.site.email)}
           ${renderField("Instagram URL", "site.instagramUrl", editorState.site.instagramUrl)}
           ${renderField("Instagram label", "site.instagramLabel", editorState.site.instagramLabel)}
+          ${renderField("Footer note", "site.footerNote", editorState.site.footerNote)}
         </section>
 
         <section class="editor-panel">
@@ -93,7 +95,7 @@
     return `
       <section class="editor-panel editor-panel--full">
         <p class="card-label">${escapeHtml(category.label)}</p>
-        <p>${escapeHtml(category.room)} / ${escapeHtml(category.atmosphere)}</p>
+        ${category.room || category.atmosphere ? `<p>${escapeHtml([category.room, category.atmosphere].filter(Boolean).join(" / "))}</p>` : ""}
         <div class="editor-work-list">
           ${items.map((work, index) => renderWorkEditorCard(category, work, index)).join("")}
         </div>
@@ -149,10 +151,12 @@
     const next = JSON.parse(JSON.stringify(editorState));
 
     next.site.artistName = getFieldValue("site.artistName");
+    next.site.shortName = getFieldValue("site.shortName");
     next.site.role = getFieldValue("site.role");
     next.site.email = getFieldValue("site.email");
     next.site.instagramUrl = getFieldValue("site.instagramUrl");
     next.site.instagramLabel = getFieldValue("site.instagramLabel");
+    next.site.footerNote = getFieldValue("site.footerNote");
 
     next.hero.image = getFieldValue("hero.image");
     next.hero.alt = getFieldValue("hero.alt");
