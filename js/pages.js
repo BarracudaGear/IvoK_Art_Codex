@@ -36,6 +36,19 @@ function renderHomePage(data) {
 
     <section class="section">
       <div class="container">
+        <p class="section-label">Education and career</p>
+        <h2 class="section-title">Education and career</h2>
+        <div class="stack-copy">
+          ${(data.about.biography || []).map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("")}
+        </div>
+        <div class="button-row">
+          <a class="button-secondary" href="about.html">About</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
         <p class="section-label">Works</p>
         <h2 class="section-title">Categories</h2>
         <div class="category-grid">

@@ -99,8 +99,8 @@ code {
 
 .site-brand-name {
   font-size: 1.5rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  text-transform: none;
 }
 
 .site-brand-role,

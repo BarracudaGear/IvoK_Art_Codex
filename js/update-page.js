@@ -9,7 +9,7 @@ function renderUpdatePage(data) {
         <p class="page-label">Studio update</p>
         <h1 class="page-title">Studio update</h1>
         <p class="page-copy">
-          Use this form to send site updates. Artwork photographs should be emailed separately.
+          Use this form to send site updates, including artwork images. Very large batches can still be emailed if they hit a size limit (Gmail/FormSubmit about 10–25MB).
         </p>
       </div>
     </section>
@@ -26,9 +26,10 @@ function renderUpdatePage(data) {
           class="contact-panel form-grid update-form"
           action="https://formsubmit.co/nsdatalabs.bots@gmail.com"
           method="POST"
+          enctype="multipart/form-data"
           data-update-form
         >
-          <input type="hidden" name="_subject" value="Ivo Koytchev studio update" />
+          <input type="hidden" name="_subject" value="IvoK studio update" />
           <input type="hidden" name="_template" value="table" />
           <input type="hidden" name="_captcha" value="false" />
           <input type="hidden" name="_next" value="" />
@@ -64,6 +65,7 @@ function renderUpdatePage(data) {
                   <option value="Category/Works">Category/Works</option>
                   <option value="Commissions">Commissions</option>
                   <option value="Prints">Prints</option>
+                  <option value="Prices">Prices</option>
                   <option value="Other">Other</option>
                 </select>
               </label>
@@ -71,19 +73,29 @@ function renderUpdatePage(data) {
           </fieldset>
 
           <fieldset class="form-fieldset">
-            <legend>Artist and about</legend>
+            <legend>Artist and site name</legend>
             <div class="field">
               <label>
                 <span>Artist display name</span>
-                <input type="text" name="artist_display_name" />
+                <input type="text" name="artist_display_name" placeholder="Ivo Koytchev" />
               </label>
             </div>
             <div class="field">
               <label>
-                <span>Short tagline</span>
-                <input type="text" name="short_tagline" />
+                <span>Header / site name</span>
+                <input type="text" name="header_site_name" placeholder="Ivo Koytchev" />
               </label>
             </div>
+            <div class="field">
+              <label>
+                <span>Role / tagline (optional)</span>
+                <input type="text" name="role_tagline" />
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset class="form-fieldset">
+            <legend>About</legend>
             <div class="field">
               <label>
                 <span>About / bio</span>
@@ -92,7 +104,7 @@ function renderUpdatePage(data) {
             </div>
             <div class="field">
               <label>
-                <span>Education / career notes</span>
+                <span>Education / career</span>
                 <textarea name="education_career"></textarea>
               </label>
             </div>
@@ -127,7 +139,23 @@ function renderUpdatePage(data) {
           </fieldset>
 
           <fieldset class="form-fieldset">
-            <legend>Commissions and prints</legend>
+            <legend>Homepage</legend>
+            <div class="field">
+              <label>
+                <span>Hero title</span>
+                <input type="text" name="hero_title" />
+              </label>
+            </div>
+            <div class="field">
+              <label>
+                <span>Hero statement</span>
+                <textarea name="hero_statement"></textarea>
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset class="form-fieldset">
+            <legend>Commissions</legend>
             <div class="field">
               <label>
                 <span>Commission notes</span>
@@ -136,15 +164,105 @@ function renderUpdatePage(data) {
             </div>
             <div class="field">
               <label>
-                <span>Print notes</span>
-                <textarea name="print_notes"></textarea>
+                <span>Commission prices</span>
+                <textarea name="commission_prices"></textarea>
+              </label>
+            </div>
+            <div class="field">
+              <label>
+                <span>Commission process notes</span>
+                <textarea name="commission_process"></textarea>
               </label>
             </div>
           </fieldset>
 
           <fieldset class="form-fieldset">
+            <legend>Prints</legend>
+            <div class="field">
+              <label>
+                <span>Print notes</span>
+                <textarea name="print_notes"></textarea>
+              </label>
+            </div>
+            <div class="print-size-block">
+              <p>Print sizes and prices (leave blank if none)</p>
+              <div class="form-row-3">
+                <div class="field">
+                  <label>
+                    <span>Size 1 name</span>
+                    <input type="text" name="print_size_1_name" />
+                  </label>
+                </div>
+                <div class="field">
+                  <label>
+                    <span>Size 1 dimensions</span>
+                    <input type="text" name="print_size_1_dimensions" />
+                  </label>
+                </div>
+                <div class="field">
+                  <label>
+                    <span>Size 1 price</span>
+                    <input type="text" name="print_size_1_price" />
+                  </label>
+                </div>
+              </div>
+              <div class="form-row-3">
+                <div class="field">
+                  <label>
+                    <span>Size 2 name</span>
+                    <input type="text" name="print_size_2_name" />
+                  </label>
+                </div>
+                <div class="field">
+                  <label>
+                    <span>Size 2 dimensions</span>
+                    <input type="text" name="print_size_2_dimensions" />
+                  </label>
+                </div>
+                <div class="field">
+                  <label>
+                    <span>Size 2 price</span>
+                    <input type="text" name="print_size_2_price" />
+                  </label>
+                </div>
+              </div>
+              <div class="form-row-3">
+                <div class="field">
+                  <label>
+                    <span>Size 3 name</span>
+                    <input type="text" name="print_size_3_name" />
+                  </label>
+                </div>
+                <div class="field">
+                  <label>
+                    <span>Size 3 dimensions</span>
+                    <input type="text" name="print_size_3_dimensions" />
+                  </label>
+                </div>
+                <div class="field">
+                  <label>
+                    <span>Size 3 price</span>
+                    <input type="text" name="print_size_3_price" />
+                  </label>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="form-fieldset">
             <legend>Artwork update</legend>
-            <p class="form-note">Photographs should still be emailed separately.</p>
+            <div class="field">
+              <label>
+                <span>Upload artwork images (JPG, PNG, WebP, HEIC, GIF, TIFF). More than one file is fine.</span>
+                <input
+                  type="file"
+                  name="attachment"
+                  accept="image/jpeg,image/jpg,image/png,image/webp,image/heic,image/heif,image/gif,image/tiff,.jpg,.jpeg,.png,.webp,.heic,.heif,.gif,.tif,.tiff"
+                  multiple
+                />
+              </label>
+            </div>
+            <p class="form-note">Very large batches can still be emailed if they hit a size limit (Gmail/FormSubmit about 10–25MB).</p>
             <div class="field">
               <label>
                 <span>Category</span>
@@ -180,8 +298,24 @@ function renderUpdatePage(data) {
             </div>
             <div class="field">
               <label>
-                <span>Short description</span>
+                <span>Price</span>
+                <input type="text" name="artwork_price" />
+              </label>
+            </div>
+            <div class="field">
+              <label>
+                <span>Description</span>
                 <textarea name="artwork_description"></textarea>
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset class="form-fieldset">
+            <legend>Prices</legend>
+            <div class="field">
+              <label>
+                <span>Remove / do not show prices</span>
+                <textarea name="remove_prices_note" placeholder="Write if prices should be hidden or removed from the site."></textarea>
               </label>
             </div>
           </fieldset>
