@@ -1,14 +1,17 @@
 # Content Guide
 
-Use the built-in editor at `editor.html` to update the public site content without editing the HTML.
+Use the built-in editor to update the public site content without editing the HTML.
+
+The editor is local-only. It is not published on GitHub Pages, so the live `/editor.html` URL will not work. Open `editor.html` from a local copy of this repo.
 
 ## Quick steps
 
 1. Add your new image files to the `images/` folder.
-2. Open `editor.html` in the browser.
+2. Open `editor.html` locally in the browser (double-click the file, or serve the folder locally). Do not use the public site URL.
 3. Update the hero image, artist portrait, and works in each category.
 4. Click `Download site-data.js`.
 5. Replace `js/site-data.js` with the downloaded file.
+6. Commit and push, or send the new file plus images to whoever publishes.
 
 ## Image paths
 
