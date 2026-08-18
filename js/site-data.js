@@ -599,8 +599,8 @@ window.SITE_DATA = {
     "label": "About",
     "title": "Ivo Koytchev",
     "statement": "",
-    "portraitImage": "images/about.svg",
-    "portraitAlt": "Artist portrait placeholder",
+    "portraitImage": "images/hero.jpg",
+    "portraitAlt": "Ivo Koytchev in the studio",
     "biography": [
       "Art School Kazanlak, Bulgaria, 1985–1989.",
       "Academy of Fine Arts, Sofia, Bulgaria — Master of Fine Arts, 1991–1996.",
