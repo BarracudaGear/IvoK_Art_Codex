@@ -329,6 +329,15 @@ function initWorksFilter() {
       });
     });
   });
+
+  const params = new URLSearchParams(window.location.search);
+  const category = params.get("category");
+  if (category) {
+    const match = buttons.find((item) => item.getAttribute("data-filter") === category);
+    if (match) {
+      match.click();
+    }
+  }
 }
 
 function initMailtoForms(data) {

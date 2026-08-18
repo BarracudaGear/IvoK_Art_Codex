@@ -49,11 +49,16 @@ function renderHomePage(data) {
 
     <section class="section">
       <div class="container">
-        <p class="section-label">Works</p>
-        <h2 class="section-title">Categories</h2>
-        <div class="category-grid">
-          ${data.categories.map((category) => renderRoomCard(category)).join("")}
-        </div>
+        <h2 class="section-title">Works</h2>
+        <nav class="category-nav" aria-label="Categories">
+          ${data.categories
+            .map(
+              (category) => `
+                <a href="works.html?category=${encodeURIComponent(category.slug)}">${escapeHtml(category.label)}</a>
+              `
+            )
+            .join("")}
+        </nav>
         ${featuredMarkup}
         <div class="button-row">
           <a class="button" href="works.html">View Works</a>
@@ -106,9 +111,6 @@ function renderWorksPage(data) {
 
     <section class="section">
       <div class="container">
-        <div class="room-grid">
-          ${data.categories.map((category) => renderRoomCard(category)).join("")}
-        </div>
         <div class="filter-bar" aria-label="Filter works by category">
           <button class="filter-button is-active" type="button" data-filter="all" aria-pressed="true">All Works</button>
           ${data.categories
