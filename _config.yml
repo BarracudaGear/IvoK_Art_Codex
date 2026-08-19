@@ -1,6 +1,7 @@
-# GitHub Pages runs Jekyll. Keep the local content editor out of the published site.
+# GitHub Pages runs Jekyll. Keep the local content editor and client briefs out of the published site.
 # Files stay in the repo; open editor.html from a local checkout.
 # Do not add .nojekyll unless you replace this exclude with another publish filter.
 exclude:
   - editor.html
   - js/editor.js
+  - Client Briefs
