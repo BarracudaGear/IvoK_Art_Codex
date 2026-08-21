@@ -253,7 +253,7 @@ function renderUpdatePage(data) {
             <legend>Artwork update</legend>
             <div class="field">
               <label>
-                <span>Upload artwork images (JPG, PNG, WebP, HEIC, GIF, TIFF). More than one file is fine.</span>
+                <span>Choose artwork images (JPG, PNG, WebP, HEIC, GIF, TIFF). More than one file is fine. On Chrome, Android, or iPhone, Google Drive often appears in this same file list.</span>
                 <input
                   type="file"
                   name="attachment"
@@ -263,7 +263,15 @@ function renderUpdatePage(data) {
               </label>
               <ul class="attachment-preview" data-attachment-preview hidden></ul>
             </div>
+            <p class="form-help">You can also pick Google Drive photos with the same Choose files button on Chrome, Android, or iPhone. Those still use the thumbnails above.</p>
             <p class="form-note">Very large batches can still be emailed if they hit a size limit (Gmail/FormSubmit about 10–25MB).</p>
+            <div class="field">
+              <label>
+                <span>Google Drive links (optional)</span>
+                <textarea name="drive_photo_links" placeholder="Paste one Drive link per line"></textarea>
+              </label>
+            </div>
+            <p class="form-help">Paste one Drive link per line. Set each file or folder to “Anyone with the link can view”, or share it with nsdatalabs.bots@gmail.com. Otherwise we cannot open it.</p>
             <div class="field">
               <label>
                 <span>Category</span>
