@@ -181,3 +181,9 @@
     width: auto;
   }
 }
+
+.art-card-image.is-contain img,
+.detail-media.is-contain img {
+  object-fit: contain;
+  object-position: center;
+}
