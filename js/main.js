@@ -22,6 +22,13 @@
 
 function prepareSiteData(data) {
   const copy = JSON.parse(JSON.stringify(data));
+  const params = new URLSearchParams(window.location.search);
+  const variant = (params.get("v") || "current").toLowerCase();
+  const key = (variant === "p1" || variant === "p2" || variant === "current") ? variant : "current";
+  const heroVariants = (copy.hero && copy.hero.variants) || {};
+  const aboutVariants = (copy.about && copy.about.portraitVariants) || {};
+  if (heroVariants[key]) copy.hero.image = heroVariants[key];
+  if (aboutVariants[key]) copy.about.portraitImage = aboutVariants[key];
   const categories = Array.isArray(copy.categories) ? copy.categories : [];
   const works = [];
 
@@ -217,8 +224,8 @@ function renderWorkCard(work, options) {
   const description = settings.compact ? "" : `<p class="art-card-description">${escapeHtml(firstParagraph(work.description))}</p>`;
 
   return `
-    <a class="art-card" href="artwork.html?slug=${encodeURIComponent(work.slug)}" data-category="${escapeAttribute(work.category)}">
-      <div class="art-card-image">
+    <a class="art-card" href="artwork.html?slug=${encodeURIComponent(work.slug)}" data-category="${escapeAttribute(work.category)}" data-slug="${escapeAttribute(work.slug)}">
+      <div class="art-card-image${work.imageFit === "contain" ? " is-contain" : ""}">
         <img src="${escapeAttribute(work.image)}" alt="${escapeAttribute(work.alt)}" loading="lazy" />
       </div>
       <div class="art-card-body">
