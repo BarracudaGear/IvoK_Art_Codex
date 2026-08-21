@@ -192,7 +192,7 @@ function renderArtworkPage(data) {
     <section class="section">
       <div class="container detail-layout">
         <div>
-          <div class="detail-media">
+          <div class="detail-media${work.imageFit === "contain" ? " is-contain" : ""}">
             <img src="${escapeAttribute(work.image)}" alt="${escapeAttribute(work.alt)}" />
           </div>
           <div class="detail-copy">
@@ -339,6 +339,20 @@ function renderCommissionsPage(data) {
         <p class="page-copy">${escapeHtml(data.commissions.description)}</p>
       </div>
     </section>
+
+    ${data.commissions.images && data.commissions.images.length ? `
+    <section class="section">
+      <div class="container">
+        <div class="thumbnail-grid">
+          ${data.commissions.images.map((item) => `
+            <article class="thumb-card">
+              <img src="${escapeAttribute(item.image)}" alt="${escapeAttribute(item.alt)}" loading="lazy" />
+            </article>
+          `).join("")}
+        </div>
+      </div>
+    </section>
+    ` : ""}
 
     ${
       stepsMarkup
