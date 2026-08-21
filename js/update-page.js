@@ -261,6 +261,7 @@ function renderUpdatePage(data) {
                   multiple
                 />
               </label>
+              <ul class="attachment-preview" data-attachment-preview hidden></ul>
             </div>
             <p class="form-note">Very large batches can still be emailed if they hit a size limit (Gmail/FormSubmit about 10–25MB).</p>
             <div class="field">

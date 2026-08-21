@@ -401,6 +401,8 @@ function initUpdateForm() {
     nextField.value = new URL("update.html?sent=1", window.location.href).href;
   }
 
+  initAttachmentPreview(form);
+
   form.addEventListener("submit", function () {
     const subjectField = form.querySelector('[name="_subject"]');
     if (!subjectField) {
@@ -426,6 +428,106 @@ function initUpdateForm() {
     form.hidden = true;
     thanks.hidden = false;
   }
+}
+
+function initAttachmentPreview(form) {
+  const input = form.querySelector('input[name="attachment"]');
+  const preview = form.querySelector("[data-attachment-preview]");
+
+  if (!input || !preview) {
+    return;
+  }
+
+  const objectUrls = [];
+
+  function revokePreviewUrls() {
+    objectUrls.splice(0).forEach(function (url) {
+      URL.revokeObjectURL(url);
+    });
+  }
+
+  function selectedFiles() {
+    return Array.from(input.files || []);
+  }
+
+  function assignFiles(files) {
+    const transfer = new DataTransfer();
+    files.forEach(function (file) {
+      transfer.items.add(file);
+    });
+    input.files = transfer.files;
+  }
+
+  function showNameFallback(frame, fileName) {
+    frame.textContent = "";
+    const fallback = document.createElement("span");
+    fallback.className = "attachment-preview-fallback";
+    fallback.textContent = fileName;
+    frame.appendChild(fallback);
+  }
+
+  function renderPreview() {
+    revokePreviewUrls();
+    preview.textContent = "";
+
+    const files = selectedFiles();
+    preview.hidden = files.length === 0;
+
+    files.forEach(function (file, index) {
+      const item = document.createElement("li");
+      item.className = "attachment-preview-item";
+
+      const remove = document.createElement("button");
+      remove.type = "button";
+      remove.className = "attachment-preview-remove";
+      remove.setAttribute("data-remove-index", String(index));
+      remove.setAttribute("aria-label", "Remove " + file.name);
+      remove.textContent = "X";
+
+      const frame = document.createElement("div");
+      frame.className = "attachment-preview-frame";
+
+      const caption = document.createElement("p");
+      caption.className = "attachment-preview-name";
+      caption.textContent = file.name;
+
+      const url = URL.createObjectURL(file);
+      objectUrls.push(url);
+
+      const image = document.createElement("img");
+      image.src = url;
+      image.alt = file.name;
+      image.loading = "lazy";
+      image.addEventListener("error", function () {
+        showNameFallback(frame, file.name);
+      });
+      frame.appendChild(image);
+
+      item.appendChild(remove);
+      item.appendChild(frame);
+      item.appendChild(caption);
+      preview.appendChild(item);
+    });
+  }
+
+  input.addEventListener("change", renderPreview);
+
+  preview.addEventListener("click", function (event) {
+    const button = event.target.closest("[data-remove-index]");
+    if (!button || !preview.contains(button)) {
+      return;
+    }
+
+    const index = Number(button.getAttribute("data-remove-index"));
+    if (Number.isNaN(index)) {
+      return;
+    }
+
+    assignFiles(selectedFiles().filter(function (_file, fileIndex) {
+      return fileIndex !== index;
+    }));
+    renderPreview();
+  });
 }
 
 function createMailtoUrl(email, subject, lines) {
