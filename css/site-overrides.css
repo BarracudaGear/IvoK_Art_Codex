@@ -121,6 +121,88 @@
   }
 }
 
+.attachment-preview {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr));
+  gap: 0.75rem;
+  margin: 0.25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.attachment-preview[hidden] {
+  display: none;
+}
+
+.attachment-preview-item {
+  position: relative;
+  display: grid;
+  gap: 0.4rem;
+  min-width: 0;
+}
+
+.attachment-preview-frame {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: var(--white);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-card);
+}
+
+.attachment-preview-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.attachment-preview-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 0.7rem;
+  text-align: center;
+  font-family: "Jost", sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--umber);
+  word-break: break-word;
+}
+
+.attachment-preview-name {
+  font-family: "Jost", sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+  color: var(--umber);
+  word-break: break-word;
+}
+
+.attachment-preview-remove {
+  position: absolute;
+  top: 0.3rem;
+  right: 0.3rem;
+  z-index: 1;
+  width: 1.7rem;
+  height: 1.7rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--inkwell);
+  font-family: "Jost", sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.attachment-preview-remove:hover,
+.attachment-preview-remove:focus-visible {
+  background: var(--inkwell);
+  color: var(--white);
+}
+
 .category-nav {
   display: flex;
   flex-wrap: wrap;
