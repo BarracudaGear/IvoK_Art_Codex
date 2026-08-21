@@ -3,9 +3,9 @@ window.SITE_DATA = {
     "artistName": "Ivo Koytchev",
     "shortName": "Ivo K",
     "role": "Painter",
-    "email": "",
-    "instagramUrl": "",
-    "instagramLabel": "",
+    "email": "koytchevivo@gmail.com",
+    "instagramUrl": "https://www.instagram.com/koytchevivo/",
+    "instagramLabel": "@koytchevivo",
     "footerNote": "Portraits, landscapes, interior murals, exterior murals, and faux finishes."
   },
   "hero": {
@@ -18,7 +18,12 @@ window.SITE_DATA = {
     "primaryCtaLabel": "View Works",
     "primaryCtaHref": "works.html",
     "secondaryCtaLabel": "Commissions",
-    "secondaryCtaHref": "commissions.html"
+    "secondaryCtaHref": "commissions.html",
+    "variants": {
+      "current": "images/hero.jpg",
+      "p1": "images/profile1.jpg",
+      "p2": "images/profile2.jpg"
+    }
   },
   "categories": [
     {
@@ -102,13 +107,26 @@ window.SITE_DATA = {
         "dimensions": "",
         "price": "",
         "featured": false,
-        "description": []
+        "description": [],
+        "imageFit": "contain"
       },
       {
         "slug": "portraits-06",
         "title": "Untitled 6",
         "image": "images/portraits/portraits-06.jpg",
         "alt": "Portraits Untitled 6",
+        "year": "",
+        "medium": "",
+        "dimensions": "",
+        "price": "",
+        "featured": false,
+        "description": []
+      },
+      {
+        "slug": "portraits-07",
+        "title": "Untitled 7",
+        "image": "images/portraits/portraits-07.jpg",
+        "alt": "Portraits Untitled 7",
         "year": "",
         "medium": "",
         "dimensions": "",
@@ -140,7 +158,8 @@ window.SITE_DATA = {
         "dimensions": "",
         "price": "",
         "featured": false,
-        "description": []
+        "description": [],
+        "imageFit": "contain"
       },
       {
         "slug": "landscapes-03",
@@ -191,18 +210,6 @@ window.SITE_DATA = {
         "description": []
       },
       {
-        "slug": "landscapes-07",
-        "title": "Untitled 7",
-        "image": "images/landscapes/landscapes-07.jpg",
-        "alt": "Landscapes Untitled 7",
-        "year": "",
-        "medium": "",
-        "dimensions": "",
-        "price": "",
-        "featured": false,
-        "description": []
-      },
-      {
         "slug": "landscapes-08",
         "title": "Untitled 8",
         "image": "images/landscapes/landscapes-08.jpg",
@@ -212,7 +219,8 @@ window.SITE_DATA = {
         "dimensions": "",
         "price": "",
         "featured": false,
-        "description": []
+        "description": [],
+        "imageFit": "contain"
       }
     ],
     "interior-murals": [
@@ -281,6 +289,42 @@ window.SITE_DATA = {
         "title": "Untitled 6",
         "image": "images/interior-murals/interior-murals-06.jpg",
         "alt": "Interior Murals Untitled 6",
+        "year": "",
+        "medium": "",
+        "dimensions": "",
+        "price": "",
+        "featured": false,
+        "description": []
+      },
+      {
+        "slug": "interior-murals-07",
+        "title": "Untitled 7",
+        "image": "images/interior-murals/interior-murals-07.jpg",
+        "alt": "Interior Murals Untitled 7",
+        "year": "",
+        "medium": "",
+        "dimensions": "",
+        "price": "",
+        "featured": false,
+        "description": []
+      },
+      {
+        "slug": "interior-murals-08",
+        "title": "Untitled 8",
+        "image": "images/interior-murals/interior-murals-08.jpg",
+        "alt": "Interior Murals Untitled 8",
+        "year": "",
+        "medium": "",
+        "dimensions": "",
+        "price": "",
+        "featured": false,
+        "description": []
+      },
+      {
+        "slug": "interior-murals-09",
+        "title": "Untitled 9",
+        "image": "images/interior-murals/interior-murals-09.jpg",
+        "alt": "Interior Murals Untitled 9",
         "year": "",
         "medium": "",
         "dimensions": "",
@@ -367,6 +411,18 @@ window.SITE_DATA = {
         "title": "Untitled 7",
         "image": "images/exterior-murals/exterior-murals-07.jpg",
         "alt": "Exterior Murals Untitled 7",
+        "year": "",
+        "medium": "",
+        "dimensions": "",
+        "price": "",
+        "featured": false,
+        "description": []
+      },
+      {
+        "slug": "exterior-murals-08",
+        "title": "Untitled 8",
+        "image": "images/exterior-murals/exterior-murals-08.jpg",
+        "alt": "Exterior Murals Untitled 8",
         "year": "",
         "medium": "",
         "dimensions": "",
@@ -579,6 +635,30 @@ window.SITE_DATA = {
         "price": "",
         "featured": false,
         "description": []
+      },
+      {
+        "slug": "faux-finishes-18",
+        "title": "Untitled 18",
+        "image": "images/faux-finishes/faux-finishes-18.jpg",
+        "alt": "Faux Finishes Untitled 18",
+        "year": "",
+        "medium": "",
+        "dimensions": "",
+        "price": "",
+        "featured": false,
+        "description": []
+      },
+      {
+        "slug": "faux-finishes-19",
+        "title": "Untitled 19",
+        "image": "images/faux-finishes/faux-finishes-19.jpg",
+        "alt": "Faux Finishes Untitled 19",
+        "year": "",
+        "medium": "",
+        "dimensions": "",
+        "price": "",
+        "featured": false,
+        "description": []
       }
     ]
   },
@@ -593,7 +673,17 @@ window.SITE_DATA = {
     "label": "Commissions",
     "title": "Commissions",
     "description": "Inquiries welcome. Contact for details.",
-    "steps": []
+    "steps": [],
+    "images": [
+      {
+        "image": "images/interior-murals/interior-murals-01.jpg",
+        "alt": "Interior mural"
+      },
+      {
+        "image": "images/exterior-murals/exterior-murals-01.jpg",
+        "alt": "Exterior mural"
+      }
+    ]
   },
   "about": {
     "label": "About",
@@ -605,7 +695,12 @@ window.SITE_DATA = {
       "Art School Kazanlak, Bulgaria, 1985–1989.",
       "Academy of Fine Arts, Sofia, Bulgaria — Master of Fine Arts, 1991–1996.",
       "Ivo Koytchev Studios Inc, 1999–2022."
-    ]
+    ],
+    "portraitVariants": {
+      "current": "images/hero.jpg",
+      "p1": "images/profile1.jpg",
+      "p2": "images/profile2.jpg"
+    }
   },
   "contact": {
     "label": "Contact",
