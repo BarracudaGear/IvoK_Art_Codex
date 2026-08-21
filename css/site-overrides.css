@@ -55,6 +55,15 @@
   max-width: 52rem;
 }
 
+.update-form .form-help {
+  font-family: "Jost", sans-serif;
+  font-size: 0.92rem;
+  letter-spacing: 0.02em;
+  line-height: 1.55;
+  text-transform: none;
+  color: var(--umber);
+}
+
 .thank-you {
   display: grid;
   gap: 1rem;
