@@ -100,11 +100,10 @@ function renderHomePage(data) {
 
 function renderWorksPage(data) {
   const mixWorks = data.mixedWorks && data.mixedWorks.length ? data.mixedWorks : data.allWorks.slice(0, 6);
-  const mixMarkup = mixWorks.length
-    ? mixWorks.map((work) => renderWorkCard(work)).join("")
-    : renderEmptyState("Works", "Works will appear here.");
-  const catalogMarkup = data.allWorks.length
-    ? data.allWorks.map((work) => renderWorkCard(work)).join("")
+  const worksMarkup = data.allWorks.length
+    ? `${mixWorks.map((work) => renderWorkCard(work, { worksSet: "mix" })).join("")}${data.allWorks
+        .map((work) => renderWorkCard(work, { worksSet: "catalog" }))
+        .join("")}`
     : renderEmptyState("Works", "Works will appear here.");
 
   return `
@@ -130,11 +129,8 @@ function renderWorksPage(data) {
             )
             .join("")}
         </div>
-        <div class="works-grid is-filtering" data-works-mix>
-          ${mixMarkup}
-        </div>
-        <div class="works-grid is-filtering" data-works-catalog hidden>
-          ${catalogMarkup}
+        <div class="works-grid is-filtering">
+          ${worksMarkup}
         </div>
       </div>
     </section>

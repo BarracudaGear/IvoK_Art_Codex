@@ -284,9 +284,10 @@ function renderEmptyState(label, title) {
 function renderWorkCard(work, options) {
   const settings = options || {};
   const description = settings.compact ? "" : `<p class="art-card-description">${escapeHtml(firstParagraph(work.description))}</p>`;
+  const worksSet = settings.worksSet ? ` data-works-set="${escapeAttribute(settings.worksSet)}"` : "";
 
   return `
-    <a class="art-card" href="${escapeAttribute(siteHref("artwork.html?slug=" + encodeURIComponent(work.slug)))}" data-category="${escapeAttribute(work.category)}" data-slug="${escapeAttribute(work.slug)}">
+    <a class="art-card" href="${escapeAttribute(siteHref("artwork.html?slug=" + encodeURIComponent(work.slug)))}" data-category="${escapeAttribute(work.category)}" data-slug="${escapeAttribute(work.slug)}"${worksSet}>
       <div class="art-card-image${work.imageFit === "contain" ? " is-contain" : ""}">
         <img src="${escapeAttribute(work.image)}" alt="${escapeAttribute(work.alt)}" loading="lazy" />
       </div>
@@ -376,11 +377,7 @@ function initNavigation() {
 
 function initWorksFilter() {
   const buttons = Array.from(document.querySelectorAll("[data-filter]"));
-  const mixGrid = document.querySelector("[data-works-mix]");
-  const catalogGrid = document.querySelector("[data-works-catalog]");
-  const catalogCards = catalogGrid
-    ? Array.from(catalogGrid.querySelectorAll(".art-card"))
-    : Array.from(document.querySelectorAll(".works-grid .art-card"));
+  const cards = Array.from(document.querySelectorAll(".works-grid .art-card"));
 
   if (!buttons.length) {
     return;
@@ -393,23 +390,14 @@ function initWorksFilter() {
       item.setAttribute("aria-pressed", String(active));
     });
 
-    if (mixGrid && catalogGrid) {
-      const showMix = filter === "all";
-      mixGrid.hidden = !showMix;
-      catalogGrid.hidden = showMix;
-
-      if (!showMix) {
-        catalogCards.forEach((card) => {
-          card.hidden = card.getAttribute("data-category") !== filter;
-        });
+    cards.forEach((card) => {
+      const set = card.getAttribute("data-works-set");
+      if (set === "mix" || set === "catalog") {
+        card.hidden = filter === "all" ? set !== "mix" : set !== "catalog" || card.getAttribute("data-category") !== filter;
+        return;
       }
 
-      return;
-    }
-
-    catalogCards.forEach((card) => {
-      const matches = filter === "all" || card.getAttribute("data-category") === filter;
-      card.hidden = !matches;
+      card.hidden = filter !== "all" && card.getAttribute("data-category") !== filter;
     });
   }
 
@@ -421,9 +409,7 @@ function initWorksFilter() {
 
   const params = new URLSearchParams(window.location.search);
   const category = params.get("category");
-  if (category && buttons.some((item) => item.getAttribute("data-filter") === category)) {
-    applyFilter(category);
-  }
+  applyFilter(category && buttons.some((item) => item.getAttribute("data-filter") === category) ? category : "all");
 }
 
 function initMailtoForms(data) {
