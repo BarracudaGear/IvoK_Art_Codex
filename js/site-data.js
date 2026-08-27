@@ -51,6 +51,81 @@ window.SITE_DATA = {
   "worksByCategory": {
     "portraits": [
       {
+        "slug": "portraits-08",
+        "title": "Untitled",
+        "image": "images/portraits/portraits-08.jpg",
+        "alt": "Untitled portrait",
+        "year": "",
+        "medium": "",
+        "dimensions": "",
+        "price": "",
+        "featured": true,
+        "description": []
+      },
+      {
+        "slug": "portraits-09",
+        "title": "Untitled",
+        "image": "images/portraits/portraits-09.jpg",
+        "alt": "Untitled portrait",
+        "year": "",
+        "medium": "",
+        "dimensions": "",
+        "price": "",
+        "featured": true,
+        "description": [],
+        "imageFit": "contain"
+      },
+      {
+        "slug": "portraits-10",
+        "title": "Untitled",
+        "image": "images/portraits/portraits-10.jpg",
+        "alt": "Untitled portrait",
+        "year": "",
+        "medium": "",
+        "dimensions": "",
+        "price": "",
+        "featured": true,
+        "description": [],
+        "imageFit": "contain"
+      },
+      {
+        "slug": "portraits-11",
+        "title": "Untitled",
+        "image": "images/portraits/portraits-11.jpg",
+        "alt": "Untitled portrait",
+        "year": "",
+        "medium": "",
+        "dimensions": "",
+        "price": "",
+        "featured": false,
+        "description": []
+      },
+      {
+        "slug": "portraits-12",
+        "title": "Untitled",
+        "image": "images/portraits/portraits-12.jpg",
+        "alt": "Untitled portrait",
+        "year": "",
+        "medium": "",
+        "dimensions": "",
+        "price": "",
+        "featured": false,
+        "description": [],
+        "imageFit": "contain"
+      },
+      {
+        "slug": "portraits-13",
+        "title": "Untitled",
+        "image": "images/portraits/portraits-13.jpg",
+        "alt": "Untitled portrait",
+        "year": "",
+        "medium": "",
+        "dimensions": "",
+        "price": "",
+        "featured": false,
+        "description": []
+      },
+      {
         "slug": "portraits-01",
         "title": "Untitled",
         "image": "images/portraits/portraits-01.jpg",
@@ -59,7 +134,7 @@ window.SITE_DATA = {
         "medium": "",
         "dimensions": "",
         "price": "",
-        "featured": true,
+        "featured": false,
         "description": []
       },
       {
