@@ -4,14 +4,15 @@ window.SITE_DATA = {
     "shortName": "Ivo K",
     "role": "Painter",
     "email": "koytchevivo@gmail.com",
-    "instagramUrl": "https://www.instagram.com/koytchevivo/",
-    "instagramLabel": "@koytchevivo",
-    "footerNote": "Portraits, landscapes, interior murals, exterior murals, and faux finishes."
+    "phone": "703 220 7832",
+    "location": "Centreville VA",
+    "linkedInLabel": "LinkedIn",
+    "footerNote": "Interior and exterior murals, portraits, decorative painting, faux finishes, gold leaf, wood graining and marbleising. Residential and commercial projects."
   },
   "hero": {
     "label": "Painter",
     "title": "Ivo Koytchev",
-    "statement": "Portraits, landscapes, interior murals, exterior murals, and faux finishes.",
+    "statement": "Interior and exterior murals, portraits, decorative painting, faux finishes, gold leaf, wood graining and marbleising. Residential and commercial projects.",
     "description": "",
     "image": "images/hero.jpg",
     "alt": "Ivo Koytchev artwork",
@@ -688,13 +689,59 @@ window.SITE_DATA = {
   "about": {
     "label": "About",
     "title": "Ivo Koytchev",
-    "statement": "",
+    "statement": "Born in Kazanlak, Bulgaria in 1970. Washington DC from 1998 to present.",
     "portraitImage": "images/hero.jpg",
     "portraitAlt": "Ivo Koytchev in the studio",
     "biography": [
-      "Art School Kazanlak, Bulgaria, 1985–1989.",
-      "Academy of Fine Arts, Sofia, Bulgaria — Master of Fine Arts, 1991–1996.",
-      "Ivo Koytchev Studios Inc, 1999–2022."
+      "Art School / Kazanlak, Bulgaria — 1985 / 1989",
+      "Bulgarian Air Force — 1989 / 1991",
+      "National Academy of Fine Arts / Sofia, Bulgaria 1991 / 1996 — Master of Fine Arts",
+      "Ivo Koytchev Studios Inc — from 2001 till 2026",
+      "Interior and exterior murals, portraits, decorative painting, faux finishes, gold leaf, wood graining and marbleising. Residential and commercial projects."
+    ],
+    "awards": [
+      "2011, 2015, 2016, 2017 Washington Building Congress Craftsmanship Winner"
+    ],
+    "publications": [
+      "New York Times, Washington Post, Omaha News"
+    ],
+    "selectedResidential": [
+      "JFK House (Steve Case) McLean VA — faux finishes — 2008",
+      "Roman Abramovich House DC — faux finishes — 2010",
+      "Ralph Lauren's Villa Homestead VA — faux finishes — 2011",
+      "Jeff Bezos House DC — foyer ceiling decoration — 2020",
+      "Krystal Koons House VA — murals — 2007",
+      "George Washington's House Mt Vernon VA — 2 large interior murals / visitors center — 2009",
+      "Frank Islam's Residence — 145' landscape Interior Mural — 2015",
+      "Downtown Bethesda Exterior Mural — Fairmont Ave, Bethesda MD — 2016",
+      "Elizabeth Taylor Exterior Mural — Q and 7th Str, NW Washington DC — 2017",
+      "Marilyn Monroe Exterior Mural — Marion Str, NW Washington DC — 2022"
+    ],
+    "selectedCommercial": [
+      "The White House / west wing — wood graining and door restoration",
+      "Jams Restaurant Omaha NE — 12 paintings",
+      "Masonic Temple Omaha NE — gold leaf ceiling",
+      "Masonic Temple Strasburg PA — faux finishes / ornamental decoration",
+      "FBI Building DC — faux finishes",
+      "Serena Williams Tennis Center DC — outdoor mural",
+      "Nationals Stadium DC — Jackie Kennedy outdoor mural",
+      "Ritz Carlton Hotel Downtown DC — venetian plaster",
+      "Watergate Hotel DC — venetian plaster and concrete faux finish",
+      "Department of Interior DC — wood graining",
+      "Renwick Gallery DC — plaster renovation and gold leaf",
+      "Carnegie Institute DC — wood graining",
+      "Dino Hall Smithsonian Museum DC — trompe l'oeil doors imitation",
+      "Embassy of Cameroon — gold leaf",
+      "UAE Embassy — gold leaf",
+      "Embassy of Belgium — exterior wash technique",
+      "City Center DC — marmorino plaster",
+      "Kaiser Permanente MD — wood graining",
+      "NASA Goddard MD — lime plaster / columns",
+      "Red Cross DC — wood graining",
+      "DAR Constitution Hall — faux finishes / foyer",
+      "Blair House DC — elevator doors wood graining",
+      "Eisenhower Executive Office Building DC — wood graining doors / entire first floor",
+      "Office of the US Trade Representative DC — wood graining doors"
     ],
     "portraitVariants": {
       "current": "images/hero.jpg",
@@ -706,6 +753,6 @@ window.SITE_DATA = {
     "label": "Contact",
     "title": "Contact",
     "description": "Inquiries welcome.",
-    "location": ""
+    "location": "Centreville VA"
   }
 };

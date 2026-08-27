@@ -47,6 +47,8 @@ function renderHomePage(data) {
       </div>
     </section>
 
+    ${renderAboutExtraSections(data)}
+
     <section class="section">
       <div class="container">
         <h2 class="section-title">Works</h2>
@@ -406,7 +408,39 @@ function renderAboutPage(data) {
         </div>
       </div>
     </section>
+
+    ${renderAboutExtraSections(data)}
   `;
+}
+
+function renderAboutExtraSections(data) {
+  const about = data.about || {};
+  const groups = [
+    { label: "Awards", title: "Awards", items: about.awards },
+    { label: "Publications", title: "Publications", items: about.publications },
+    { label: "Selected residential", title: "Selected residential", items: about.selectedResidential },
+    { label: "Selected commercial", title: "Selected commercial", items: about.selectedCommercial }
+  ];
+
+  return groups
+    .map((group) => {
+      if (!group.items || !group.items.length) {
+        return "";
+      }
+
+      return `
+        <section class="section">
+          <div class="container">
+            <p class="section-label">${escapeHtml(group.label)}</p>
+            <h2 class="section-title">${escapeHtml(group.title)}</h2>
+            <div class="stack-copy">
+              ${group.items.map((item) => `<p>${escapeHtml(item)}</p>`).join("")}
+            </div>
+          </div>
+        </section>
+      `;
+    })
+    .join("");
 }
 
 function renderContactPage(data) {
@@ -418,10 +452,26 @@ function renderContactPage(data) {
     );
   }
 
+  if (data.site.phone) {
+    details.push(
+      `<p><strong>Phone:</strong> <a href="tel:${escapeAttribute(data.site.phone.replace(/\s+/g, ""))}">${escapeHtml(
+        data.site.phone
+      )}</a></p>`
+    );
+  }
+
   if (hasPublicUrl(data.site.instagramUrl) && data.site.instagramLabel) {
     details.push(
       `<p><strong>Instagram:</strong> <a href="${escapeAttribute(data.site.instagramUrl)}" target="_blank" rel="noreferrer">${escapeHtml(
         data.site.instagramLabel
+      )}</a></p>`
+    );
+  }
+
+  if (hasPublicUrl(data.site.linkedInUrl) && data.site.linkedInLabel) {
+    details.push(
+      `<p><strong>LinkedIn:</strong> <a href="${escapeAttribute(data.site.linkedInUrl)}" target="_blank" rel="noreferrer">${escapeHtml(
+        data.site.linkedInLabel
       )}</a></p>`
     );
   }

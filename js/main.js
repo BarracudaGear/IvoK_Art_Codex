@@ -136,6 +136,14 @@ function renderFooter(data) {
     );
   }
 
+  if (hasPublicUrl(data.site.linkedInUrl) && data.site.linkedInLabel) {
+    extraLinks.push(
+      `<a href="${escapeAttribute(data.site.linkedInUrl)}" target="_blank" rel="noreferrer">${escapeHtml(
+        data.site.linkedInLabel
+      )}</a>`
+    );
+  }
+
   if (hasEmail(data.site.email)) {
     extraLinks.push(`<a href="mailto:${escapeAttribute(data.site.email)}">${escapeHtml(data.site.email)}</a>`);
   }
