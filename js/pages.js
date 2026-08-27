@@ -1,6 +1,7 @@
 function renderHomePage(data) {
-  const featuredMarkup = data.featuredWorks.length
-    ? `<div class="featured-grid">${data.featuredWorks.map((work) => renderWorkCard(work, { compact: true })).join("")}</div>`
+  const selectedWorks = data.mixedWorks && data.mixedWorks.length ? data.mixedWorks : data.featuredWorks;
+  const featuredMarkup = selectedWorks.length
+    ? `<div class="featured-grid">${selectedWorks.map((work) => renderWorkCard(work, { compact: true })).join("")}</div>`
     : renderEmptyState("Works", "Works will appear here.");
 
   const printThumbs = data.featuredWorks.length
@@ -23,10 +24,10 @@ function renderHomePage(data) {
           ${data.hero.statement ? `<p class="hero-statement">${escapeHtml(data.hero.statement)}</p>` : ""}
           ${data.hero.description ? `<p class="hero-description">${escapeHtml(data.hero.description)}</p>` : ""}
           <div class="button-row">
-            <a class="button" href="${escapeAttribute(data.hero.primaryCtaHref)}">${escapeHtml(
+            <a class="button" href="${escapeAttribute(siteHref(data.hero.primaryCtaHref))}">${escapeHtml(
               data.hero.primaryCtaLabel
             )}</a>
-            <a class="button-secondary" href="${escapeAttribute(data.hero.secondaryCtaHref)}">${escapeHtml(
+            <a class="button-secondary" href="${escapeAttribute(siteHref(data.hero.secondaryCtaHref))}">${escapeHtml(
               data.hero.secondaryCtaLabel
             )}</a>
           </div>
@@ -42,7 +43,7 @@ function renderHomePage(data) {
           ${(data.about.biography || []).map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("")}
         </div>
         <div class="button-row">
-          <a class="button-secondary" href="about.html">About</a>
+          <a class="button-secondary" href="${escapeAttribute(siteHref("about.html"))}">About</a>
         </div>
       </div>
     </section>
@@ -56,14 +57,14 @@ function renderHomePage(data) {
           ${data.categories
             .map(
               (category) => `
-                <a href="works.html?category=${encodeURIComponent(category.slug)}">${escapeHtml(category.label)}</a>
+                <a href="${escapeAttribute(siteHref("works.html?category=" + encodeURIComponent(category.slug)))}">${escapeHtml(category.label)}</a>
               `
             )
             .join("")}
         </nav>
         ${featuredMarkup}
         <div class="button-row">
-          <a class="button" href="works.html">View Works</a>
+          <a class="button" href="${escapeAttribute(siteHref("works.html"))}">View Works</a>
         </div>
       </div>
     </section>
@@ -76,7 +77,7 @@ function renderHomePage(data) {
           <p>${escapeHtml(data.prints.description)}</p>
           ${data.prints.note ? `<p>${escapeHtml(data.prints.note)}</p>` : ""}
           <div class="button-row">
-            <a class="button" href="prints.html">View Prints</a>
+            <a class="button" href="${escapeAttribute(siteHref("prints.html"))}">View Prints</a>
           </div>
         </div>
         ${printThumbs}
@@ -90,7 +91,7 @@ function renderHomePage(data) {
         <p class="section-copy">${escapeHtml(data.commissions.description)}</p>
         ${commissionSteps}
         <div class="button-row">
-          <a class="button" href="commissions.html">Commissions</a>
+          <a class="button" href="${escapeAttribute(siteHref("commissions.html"))}">Commissions</a>
         </div>
       </div>
     </section>
@@ -98,8 +99,11 @@ function renderHomePage(data) {
 }
 
 function renderWorksPage(data) {
+  const mixWorks = data.mixedWorks && data.mixedWorks.length ? data.mixedWorks : data.allWorks.slice(0, 6);
   const worksMarkup = data.allWorks.length
-    ? data.allWorks.map((work) => renderWorkCard(work)).join("")
+    ? `${mixWorks.map((work) => renderWorkCard(work, { worksSet: "mix" })).join("")}${data.allWorks
+        .map((work) => renderWorkCard(work, { worksSet: "catalog" }))
+        .join("")}`
     : renderEmptyState("Works", "Works will appear here.");
 
   return `
@@ -147,7 +151,7 @@ function renderArtworkPage(data) {
           <h1 class="page-title">That artwork could not be found</h1>
           <p>Please return to the gallery and choose a work from the available categories.</p>
           <div class="button-row">
-            <a class="button" href="works.html">Browse Works</a>
+            <a class="button" href="${escapeAttribute(siteHref("works.html"))}">Browse Works</a>
           </div>
         </div>
       </section>
@@ -180,7 +184,7 @@ function renderArtworkPage(data) {
             >
               Enquire About This Work
             </a>`
-    : `<a class="button" href="contact.html">Contact for details</a>`;
+    : `<a class="button" href="${escapeAttribute(siteHref("contact.html"))}">Contact for details</a>`;
 
   return `
     <section class="page-hero">
@@ -212,7 +216,7 @@ function renderArtworkPage(data) {
           </div>
           <div class="button-row">
             ${inquiryButton}
-            <a class="button-secondary" href="works.html">Back to Works</a>
+            <a class="button-secondary" href="${escapeAttribute(siteHref("works.html"))}">Back to Works</a>
           </div>
         </aside>
       </div>
@@ -266,7 +270,7 @@ function renderPrintsPage(data) {
           <p>${escapeHtml(data.prints.note || "Contact for details.")}</p>
           <div class="button-row">
             ${emailButton}
-            <a class="button-secondary" href="contact.html">Contact</a>
+            <a class="button-secondary" href="${escapeAttribute(siteHref("contact.html"))}">Contact</a>
           </div>
         </div>
         ${sizesMarkup}
@@ -402,8 +406,8 @@ function renderAboutPage(data) {
             ${data.about.biography.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("")}
           </div>
           <div class="button-row">
-            <a class="button" href="works.html">View Works</a>
-            <a class="button-secondary" href="contact.html">Contact</a>
+            <a class="button" href="${escapeAttribute(siteHref("works.html"))}">View Works</a>
+            <a class="button-secondary" href="${escapeAttribute(siteHref("contact.html"))}">Contact</a>
           </div>
         </div>
       </div>
