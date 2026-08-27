@@ -1,34 +1,83 @@
-(function () {
-  const rawData = window.SITE_DATA;
-  const header = document.querySelector("[data-site-header]");
-  const root = document.querySelector("[data-page-root]");
-  const footer = document.querySelector("[data-site-footer]");
+const WORKS_MIX_STORAGE_KEY = "ivok-works-mix-index";
+const WORKS_MIX_SETS = [
+  ["portraits-08", "landscapes-01", "interior-murals-01", "portraits-09", "exterior-murals-01", "landscapes-02"],
+  ["portraits-10", "landscapes-03", "faux-finishes-01", "portraits-11", "interior-murals-02", "exterior-murals-02"],
+  ["landscapes-01", "portraits-08", "exterior-murals-01", "interior-murals-01", "portraits-10", "landscapes-02"]
+];
 
-  if (!rawData || !header || !root || !footer) {
-    return;
+function getSiteVariantKey() {
+  const variant = (new URLSearchParams(window.location.search).get("v") || "current").toLowerCase();
+  return variant === "p1" || variant === "p2" || variant === "current" ? variant : "current";
+}
+
+function getPreservedVariant() {
+  const variant = (new URLSearchParams(window.location.search).get("v") || "").toLowerCase();
+  return variant === "current" || variant === "p1" || variant === "p2" ? variant : "";
+}
+
+function siteHref(href) {
+  const variant = getPreservedVariant();
+  if (!variant || !href || /^(mailto:|tel:|https?:|\/\/|#)/i.test(href)) {
+    return href;
   }
 
-  const page = document.body.dataset.page || "home";
-  const siteData = prepareSiteData(rawData);
+  const hashIndex = href.indexOf("#");
+  const hash = hashIndex >= 0 ? href.slice(hashIndex) : "";
+  const withoutHash = hashIndex >= 0 ? href.slice(0, hashIndex) : href;
+  const queryIndex = withoutHash.indexOf("?");
+  const path = queryIndex >= 0 ? withoutHash.slice(0, queryIndex) : withoutHash;
+  const search = queryIndex >= 0 ? withoutHash.slice(queryIndex + 1) : "";
+  const params = new URLSearchParams(search);
+  params.set("v", variant);
+  return `${path}?${params.toString()}${hash}`;
+}
 
-  renderHeader(siteData, page);
-  renderFooter(siteData);
-  renderPage(siteData, page);
-  initNavigation();
-  initWorksFilter();
-  initMailtoForms(siteData);
-  initUpdateForm();
-})();
+function readWorksMixIndex() {
+  try {
+    const stored = Number.parseInt(sessionStorage.getItem(WORKS_MIX_STORAGE_KEY) || "", 10);
+    if (Number.isFinite(stored) && stored >= 0) {
+      return stored % WORKS_MIX_SETS.length;
+    }
+  } catch (error) {
+    // Private mode or blocked storage should still show mix A.
+  }
+
+  return 0;
+}
+
+function takeWorksMixIndex() {
+  const index = readWorksMixIndex();
+
+  try {
+    sessionStorage.setItem(WORKS_MIX_STORAGE_KEY, String((index + 1) % WORKS_MIX_SETS.length));
+  } catch (error) {
+    // Ignore persistence failures and keep the current mix for this page.
+  }
+
+  return index;
+}
+
+function resolveWorksBySlug(works, slugs) {
+  const lookup = Object.fromEntries(works.map((work) => [work.slug, work]));
+  return slugs.map((slug) => lookup[slug]).filter(Boolean);
+}
 
 function prepareSiteData(data) {
   const copy = JSON.parse(JSON.stringify(data));
-  const params = new URLSearchParams(window.location.search);
-  const variant = (params.get("v") || "current").toLowerCase();
-  const key = (variant === "p1" || variant === "p2" || variant === "current") ? variant : "current";
+  const key = getSiteVariantKey();
   const heroVariants = (copy.hero && copy.hero.variants) || {};
   const aboutVariants = (copy.about && copy.about.portraitVariants) || {};
-  if (heroVariants[key]) copy.hero.image = heroVariants[key];
-  if (aboutVariants[key]) copy.about.portraitImage = aboutVariants[key];
+
+  if (!copy.hero) {
+    copy.hero = {};
+  }
+
+  copy.hero.image = heroVariants[key] || heroVariants.current || copy.hero.image;
+
+  if (aboutVariants[key]) {
+    copy.about.portraitImage = aboutVariants[key];
+  }
+
   const categories = Array.isArray(copy.categories) ? copy.categories : [];
   const works = [];
 
@@ -65,10 +114,15 @@ function prepareSiteData(data) {
     });
   }
 
+  const page = document.body && document.body.dataset ? document.body.dataset.page : "";
+  const mixIndex = page === "home" || page === "works" ? takeWorksMixIndex() : readWorksMixIndex();
+  const mixedWorks = resolveWorksBySlug(works, WORKS_MIX_SETS[mixIndex]);
+
   return {
     ...copy,
     allWorks: works,
     featuredWorks,
+    mixedWorks,
     worksLookup: Object.fromEntries(works.map((work) => [work.slug, work]))
   };
 }
@@ -97,13 +151,13 @@ function renderHeader(data, page) {
   const navMarkup = navItems
     .map((item) => {
       const active = item.page === page ? "is-active" : "";
-      return `<a class="${active}" href="${item.href}">${escapeHtml(item.label)}</a>`;
+      return `<a class="${active}" href="${escapeAttribute(siteHref(item.href))}">${escapeHtml(item.label)}</a>`;
     })
     .join("");
 
   document.querySelector("[data-site-header]").innerHTML = `
     <div class="container site-header-inner">
-      <a class="site-brand" href="index.html" aria-label="Back to homepage">
+      <a class="site-brand" href="${escapeAttribute(siteHref("index.html"))}" aria-label="Back to homepage">
         <span class="site-brand-name">${escapeHtml(brandName(data))}</span>
       </a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
@@ -126,7 +180,7 @@ function renderFooter(data) {
 
   const extraLinks = [];
 
-  extraLinks.push(`<a class="is-quiet" href="update.html">Studio update</a>`);
+  extraLinks.push(`<a class="is-quiet" href="${escapeAttribute(siteHref("update.html"))}">Studio update</a>`);
 
   if (hasPublicUrl(data.site.instagramUrl) && data.site.instagramLabel) {
     extraLinks.push(
@@ -157,7 +211,7 @@ function renderFooter(data) {
           ${data.site.footerNote ? `<p class="footer-note">${escapeHtml(data.site.footerNote)}</p>` : ""}
         </div>
         <div class="footer-links">
-          ${footerLinks.map((item) => `<a href="${item.href}">${escapeHtml(item.label)}</a>`).join("")}
+          ${footerLinks.map((item) => `<a href="${escapeAttribute(siteHref(item.href))}">${escapeHtml(item.label)}</a>`).join("")}
           ${extraLinks.join("")}
         </div>
       </div>
@@ -232,7 +286,7 @@ function renderWorkCard(work, options) {
   const description = settings.compact ? "" : `<p class="art-card-description">${escapeHtml(firstParagraph(work.description))}</p>`;
 
   return `
-    <a class="art-card" href="artwork.html?slug=${encodeURIComponent(work.slug)}" data-category="${escapeAttribute(work.category)}" data-slug="${escapeAttribute(work.slug)}">
+    <a class="art-card" href="${escapeAttribute(siteHref("artwork.html?slug=" + encodeURIComponent(work.slug)))}" data-category="${escapeAttribute(work.category)}" data-slug="${escapeAttribute(work.slug)}">
       <div class="art-card-image${work.imageFit === "contain" ? " is-contain" : ""}">
         <img src="${escapeAttribute(work.image)}" alt="${escapeAttribute(work.alt)}" loading="lazy" />
       </div>
@@ -322,36 +376,53 @@ function initNavigation() {
 
 function initWorksFilter() {
   const buttons = Array.from(document.querySelectorAll("[data-filter]"));
-  const cards = Array.from(document.querySelectorAll(".works-grid .art-card"));
+  const mixGrid = document.querySelector("[data-works-mix]");
+  const catalogGrid = document.querySelector("[data-works-catalog]");
+  const catalogCards = catalogGrid
+    ? Array.from(catalogGrid.querySelectorAll(".art-card"))
+    : Array.from(document.querySelectorAll(".works-grid .art-card"));
 
   if (!buttons.length) {
     return;
   }
 
+  function applyFilter(filter) {
+    buttons.forEach((item) => {
+      const active = (item.getAttribute("data-filter") || "all") === filter;
+      item.classList.toggle("is-active", active);
+      item.setAttribute("aria-pressed", String(active));
+    });
+
+    if (mixGrid && catalogGrid) {
+      const showMix = filter === "all";
+      mixGrid.hidden = !showMix;
+      catalogGrid.hidden = showMix;
+
+      if (!showMix) {
+        catalogCards.forEach((card) => {
+          card.hidden = card.getAttribute("data-category") !== filter;
+        });
+      }
+
+      return;
+    }
+
+    catalogCards.forEach((card) => {
+      const matches = filter === "all" || card.getAttribute("data-category") === filter;
+      card.hidden = !matches;
+    });
+  }
+
   buttons.forEach((button) => {
     button.addEventListener("click", function () {
-      const filter = button.getAttribute("data-filter") || "all";
-
-      buttons.forEach((item) => {
-        const active = item === button;
-        item.classList.toggle("is-active", active);
-        item.setAttribute("aria-pressed", String(active));
-      });
-
-      cards.forEach((card) => {
-        const matches = filter === "all" || card.getAttribute("data-category") === filter;
-        card.hidden = !matches;
-      });
+      applyFilter(button.getAttribute("data-filter") || "all");
     });
   });
 
   const params = new URLSearchParams(window.location.search);
   const category = params.get("category");
-  if (category) {
-    const match = buttons.find((item) => item.getAttribute("data-filter") === category);
-    if (match) {
-      match.click();
-    }
+  if (category && buttons.some((item) => item.getAttribute("data-filter") === category)) {
+    applyFilter(category);
   }
 }
 
@@ -406,7 +477,7 @@ function initUpdateForm() {
 
   const nextField = form.querySelector('[name="_next"]');
   if (nextField) {
-    nextField.value = new URL("update.html?sent=1", window.location.href).href;
+    nextField.value = new URL(siteHref("update.html?sent=1"), window.location.href).href;
   }
 
   initAttachmentPreview(form);
@@ -581,3 +652,25 @@ function escapeHtml(value) {
 function escapeAttribute(value) {
   return escapeHtml(value);
 }
+
+(function () {
+  const rawData = window.SITE_DATA;
+  const header = document.querySelector("[data-site-header]");
+  const root = document.querySelector("[data-page-root]");
+  const footer = document.querySelector("[data-site-footer]");
+
+  if (!rawData || !header || !root || !footer) {
+    return;
+  }
+
+  const page = document.body.dataset.page || "home";
+  const siteData = prepareSiteData(rawData);
+
+  renderHeader(siteData, page);
+  renderFooter(siteData);
+  renderPage(siteData, page);
+  initNavigation();
+  initWorksFilter();
+  initMailtoForms(siteData);
+  initUpdateForm();
+})();
