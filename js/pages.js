@@ -158,7 +158,7 @@ function renderArtworkPage(data) {
     `;
   }
 
-  document.title = `${work.title} - ${data.site.artistName}`;
+  document.title = artworkDocumentTitle(work, data.site.artistName);
 
   const relatedWorks = data.allWorks
     .filter((item) => item.slug !== work.slug && item.category === work.category)
@@ -168,18 +168,7 @@ function renderArtworkPage(data) {
     ? `<a
               class="button"
               href="${escapeAttribute(
-                createMailtoUrl(
-                  data.site.email,
-                  `Inquiry about ${work.title}`,
-                  [
-                    `Artwork: ${work.title}`,
-                    `Category: ${work.categoryLabel}`,
-                    `Year: ${work.year}`,
-                    `Medium: ${work.medium}`,
-                    "",
-                    "I would like to enquire about this work."
-                  ]
-                )
+                createMailtoUrl(data.site.email, workInquirySubject(work), workInquiryLines(work))
               )}"
             >
               Enquire About This Work
@@ -190,7 +179,7 @@ function renderArtworkPage(data) {
     <section class="page-hero">
       <div class="container">
         <p class="page-label">${escapeHtml(work.categoryLabel)}</p>
-        <h1 class="detail-title">${escapeHtml(work.title)}</h1>
+        ${renderWorkTitleHeading(work, "h1", "detail-title")}
         <p class="page-copy">${escapeHtml(firstParagraph(work.description))}</p>
       </div>
     </section>
