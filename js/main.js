@@ -282,10 +282,21 @@ function renderEmptyState(label, title) {
   `;
 }
 
+function shouldShowCardCategoryLabel(settings) {
+  if (settings.showCategoryLabel === false || settings.worksSet === "catalog") {
+    return false;
+  }
+
+  return true;
+}
+
 function renderWorkCard(work, options) {
   const settings = options || {};
   const description = settings.compact ? "" : `<p class="art-card-description">${escapeHtml(firstParagraph(work.description))}</p>`;
   const worksSet = settings.worksSet ? ` data-works-set="${escapeAttribute(settings.worksSet)}"` : "";
+  const categoryLine = shouldShowCardCategoryLabel(settings)
+    ? `<p class="card-label">${escapeHtml(work.categoryLabel)}</p>`
+    : "";
 
   return `
     <a class="art-card" href="${escapeAttribute(siteHref("artwork.html?slug=" + encodeURIComponent(work.slug)))}" data-category="${escapeAttribute(work.category)}" data-slug="${escapeAttribute(work.slug)}"${worksSet}>
@@ -293,7 +304,7 @@ function renderWorkCard(work, options) {
         <img src="${escapeAttribute(work.image)}" alt="${escapeAttribute(work.alt)}" loading="lazy" />
       </div>
       <div class="art-card-body">
-        <p class="card-label">${escapeHtml(work.categoryLabel)}</p>
+        ${categoryLine}
         ${renderWorkTitleHeading(work, "h3")}
         <p class="work-meta">${escapeHtml(formatWorkLine(work))}</p>
         ${description}
