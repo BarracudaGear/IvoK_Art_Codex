@@ -227,7 +227,6 @@ function renderPage(data, page) {
   const root = document.querySelector("[data-page-root]");
 
   if (page === "home") {
-    document.title = `${data.site.artistName} - ${data.site.role}`;
     root.innerHTML = renderHomePage(data);
     return;
   }
