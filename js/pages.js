@@ -219,7 +219,7 @@ function renderArtworkPage(data) {
               <p class="section-label">More in ${escapeHtml(work.categoryLabel)}</p>
               <h2 class="section-title">Related works</h2>
               <div class="related-grid">
-                ${relatedWorks.map((item) => renderWorkCard(item, { compact: true })).join("")}
+                ${relatedWorks.map((item) => renderWorkCard(item, { compact: true, showCategoryLabel: false })).join("")}
               </div>
             </div>
           </section>
