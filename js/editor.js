@@ -107,10 +107,10 @@
   }
 
   function renderWorkEditorCard(category, work, index) {
-    const heading = work.title || `${category.label} work ${index + 1}`;
+    const heading = work.title || work.slug || category.label;
 
     return `
-      <article class="editor-work-card" data-work-card data-category="${escapeAttribute(category.slug)}" data-index="${index}">
+      <article class="editor-work-card" data-work-card data-category="${escapeAttribute(category.slug)}" data-index="${index}" data-slug="${escapeAttribute(work.slug || "")}">
         <div class="editor-work-card-header">
           <h3>${escapeHtml(heading)}</h3>
           <button
@@ -176,6 +176,7 @@
 
       next.worksByCategory[category.slug] = cards
         .map((card) => ({
+          slug: card.getAttribute("data-slug") || "",
           title: getWorkValue(card, "title"),
           image: getWorkValue(card, "image"),
           alt: getWorkValue(card, "alt"),
@@ -186,7 +187,7 @@
           featured: getWorkChecked(card, "featured"),
           description: splitParagraphs(getWorkValue(card, "description"))
         }))
-        .filter((work) => work.title || work.image);
+        .filter((work) => work.title || work.image || work.slug);
     });
 
     editorState = next;
@@ -200,12 +201,8 @@
       const works = Array.isArray(exportData.worksByCategory[category.slug]) ? exportData.worksByCategory[category.slug] : [];
 
       exportData.worksByCategory[category.slug] = works.map((work, index) => {
-        const title = work.title || `${category.label} Work ${index + 1}`;
-        let slug = slugify(title);
-
-        if (!slug) {
-          slug = `${category.slug}-${index + 1}`;
-        }
+        const title = String(work.title || "").trim();
+        let slug = String(work.slug || "").trim() || slugify(title) || `${category.slug}-${String(index + 1).padStart(2, "0")}`;
 
         while (seenSlugs.has(slug)) {
           slug = `${slug}-${index + 1}`;
@@ -217,7 +214,7 @@
           slug,
           title,
           image: work.image || "",
-          alt: work.alt || `${title} artwork`,
+          alt: work.alt || editorCategoryAltLabel(category),
           year: work.year || "",
           medium: work.medium || "",
           dimensions: work.dimensions || "",
@@ -288,6 +285,18 @@
         </label>
       </div>
     `;
+  }
+
+  function editorCategoryAltLabel(category) {
+    const labels = {
+      portraits: "Portrait",
+      landscapes: "Landscape",
+      "interior-murals": "Interior mural",
+      "exterior-murals": "Exterior mural",
+      "faux-finishes": "Faux finish"
+    };
+
+    return labels[category.slug] || category.label || "";
   }
 
   function createEmptyWork() {

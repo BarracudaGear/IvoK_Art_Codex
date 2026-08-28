@@ -87,11 +87,12 @@ function prepareSiteData(data) {
       : [];
 
     items.forEach((work, index) => {
-      const title = work.title || `${category.label} Work ${index + 1}`;
+      const title = normalizeWorkTitle(work.title);
       works.push({
         ...work,
-        slug: work.slug || slugify(title),
+        slug: work.slug || slugify(title) || `${category.slug}-${String(index + 1).padStart(2, "0")}`,
         title,
+        alt: workAltText(work.alt, category),
         category: category.slug,
         categoryLabel: category.label,
         room: category.room,
@@ -293,7 +294,7 @@ function renderWorkCard(work, options) {
       </div>
       <div class="art-card-body">
         <p class="card-label">${escapeHtml(work.categoryLabel)}</p>
-        <h3>${escapeHtml(work.title)}</h3>
+        ${renderWorkTitleHeading(work, "h3")}
         <p class="work-meta">${escapeHtml(formatWorkLine(work))}</p>
         ${description}
       </div>
@@ -306,7 +307,7 @@ function renderThumbnailCard(work) {
     <article class="thumb-card">
       <img src="${escapeAttribute(work.image)}" alt="${escapeAttribute(work.alt)}" loading="lazy" />
       <div class="thumb-card-body">
-        <h3>${escapeHtml(work.title)}</h3>
+        ${renderWorkTitleHeading(work, "h3")}
         ${work.price ? `<p>${escapeHtml(work.price)}</p>` : ""}
       </div>
     </article>
@@ -602,6 +603,91 @@ function createMailtoUrl(email, subject, lines) {
 
 function formatWorkLine(work) {
   return [work.medium, work.year, work.price].filter(Boolean).join(" / ");
+}
+
+const WORK_ALT_LABELS = {
+  portraits: "Portrait",
+  landscapes: "Landscape",
+  "interior-murals": "Interior mural",
+  "exterior-murals": "Exterior mural",
+  "faux-finishes": "Faux finish"
+};
+
+function categoryAltLabel(category) {
+  const slug = category && category.slug ? category.slug : category;
+  if (WORK_ALT_LABELS[slug]) {
+    return WORK_ALT_LABELS[slug];
+  }
+
+  return category && category.label ? category.label : "";
+}
+
+function normalizeWorkTitle(value) {
+  const title = String(value || "").trim();
+  if (!title || /^untitled(?:\s+\d+)?$/i.test(title)) {
+    return "";
+  }
+
+  return title;
+}
+
+function hasWorkTitle(work) {
+  return Boolean(normalizeWorkTitle(work && work.title));
+}
+
+function workAltText(value, category) {
+  const alt = String(value || "").trim();
+  if (!alt || /untitled/i.test(alt)) {
+    return categoryAltLabel(category);
+  }
+
+  return alt;
+}
+
+function renderWorkTitleHeading(work, tagName, className) {
+  if (!hasWorkTitle(work)) {
+    return "";
+  }
+
+  const classAttr = className ? ` class="${escapeAttribute(className)}"` : "";
+  return `<${tagName}${classAttr}>${escapeHtml(work.title)}</${tagName}>`;
+}
+
+function artworkDocumentTitle(work, artistName) {
+  if (!hasWorkTitle(work)) {
+    return `Artwork - ${artistName}`;
+  }
+
+  return `${work.title} - ${artistName}`;
+}
+
+function workInquirySubject(work) {
+  if (hasWorkTitle(work)) {
+    return `Inquiry about ${work.title}`;
+  }
+
+  return `Inquiry about this work — ${work.categoryLabel}`;
+}
+
+function workInquiryLines(work) {
+  const lines = [];
+
+  if (hasWorkTitle(work)) {
+    lines.push(`Artwork: ${work.title}`);
+  } else {
+    lines.push("I would like to enquire about this work.");
+  }
+
+  lines.push(`Category: ${work.categoryLabel}`);
+  lines.push(`Year: ${work.year}`);
+  lines.push(`Medium: ${work.medium}`);
+
+  if (hasWorkTitle(work)) {
+    lines.push("");
+    lines.push("I would like to enquire about this work.");
+  }
+
+  return lines;
 }
 
 function firstParagraph(description) {
