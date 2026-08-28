@@ -292,10 +292,23 @@ function shouldShowCardCategoryLabel(settings) {
 
 function renderWorkCard(work, options) {
   const settings = options || {};
-  const description = settings.compact ? "" : `<p class="art-card-description">${escapeHtml(firstParagraph(work.description))}</p>`;
+  const descriptionText = settings.compact ? "" : firstParagraph(work.description);
+  const description = descriptionText ? `<p class="art-card-description">${escapeHtml(descriptionText)}</p>` : "";
   const worksSet = settings.worksSet ? ` data-works-set="${escapeAttribute(settings.worksSet)}"` : "";
   const categoryLine = shouldShowCardCategoryLabel(settings)
     ? `<p class="card-label">${escapeHtml(work.categoryLabel)}</p>`
+    : "";
+  const titleLine = renderWorkTitleHeading(work, "h3");
+  const metaText = formatWorkLine(work);
+  const metaLine = metaText ? `<p class="work-meta">${escapeHtml(metaText)}</p>` : "";
+  const bodyInner = `${categoryLine}${titleLine}${metaLine}${description}`;
+  const body = bodyInner
+    ? `<div class="art-card-body">
+        ${categoryLine}
+        ${titleLine}
+        ${metaLine}
+        ${description}
+      </div>`
     : "";
 
   return `
@@ -303,12 +316,7 @@ function renderWorkCard(work, options) {
       <div class="art-card-image${work.imageFit === "contain" ? " is-contain" : ""}">
         <img src="${escapeAttribute(work.image)}" alt="${escapeAttribute(work.alt)}" loading="lazy" />
       </div>
-      <div class="art-card-body">
-        ${categoryLine}
-        ${renderWorkTitleHeading(work, "h3")}
-        <p class="work-meta">${escapeHtml(formatWorkLine(work))}</p>
-        ${description}
-      </div>
+      ${body}
     </a>
   `;
 }
