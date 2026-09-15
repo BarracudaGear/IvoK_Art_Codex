@@ -181,11 +181,11 @@ function renderFooter(data) {
 
   const extraLinks = [];
 
-  
-
-  if (hasPublicUrl(data.site.instagramUrl) && data.site.instagramLabel) {
+  if (hasPublicUrl(data.site.instagramUrl)) {
     extraLinks.push(
-      `<a href="${escapeAttribute(data.site.instagramUrl)}" target="_blank" rel="noreferrer"><svg class="instagram-icon" role="img" aria-label="Instagram @koytchevivo" focusable="false" width="18" height="18" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.25" fill="currentColor"/></svg></a>`
+      `<a class="footer-instagram" href="${escapeAttribute(data.site.instagramUrl)}" target="_blank" rel="noreferrer" aria-label="${escapeAttribute(
+        "Instagram " + (data.site.instagramLabel || "@koytchevivo")
+      )}">${instagramIconSvg()}</a>`
     );
   }
 
