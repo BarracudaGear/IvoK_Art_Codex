@@ -455,7 +455,7 @@ function renderContactPage(data) {
 
   if (hasPublicUrl(data.site.instagramUrl) && data.site.instagramLabel) {
     details.push(
-      `<p><strong>Instagram:</strong> <a href="${escapeAttribute(data.site.instagramUrl)}" target="_blank" rel="noreferrer">${escapeHtml(
+      `<p><strong>Instagram:</strong> <svg class="instagram-icon" aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.25" fill="currentColor"/></svg> <a href="${escapeAttribute(data.site.instagramUrl)}" target="_blank" rel="noreferrer">${escapeHtml(
         data.site.instagramLabel
       )}</a></p>`
     );
