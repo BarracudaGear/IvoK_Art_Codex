@@ -181,13 +181,11 @@ function renderFooter(data) {
 
   const extraLinks = [];
 
-  extraLinks.push(`<a class="is-quiet" href="${escapeAttribute(siteHref("update.html"))}">Studio update</a>`);
-
-  if (hasPublicUrl(data.site.instagramUrl) && data.site.instagramLabel) {
+  if (hasPublicUrl(data.site.instagramUrl)) {
     extraLinks.push(
-      `<a href="${escapeAttribute(data.site.instagramUrl)}" target="_blank" rel="noreferrer">${escapeHtml(
-        data.site.instagramLabel
-      )}</a>`
+      `<a class="footer-instagram" href="${escapeAttribute(data.site.instagramUrl)}" target="_blank" rel="noreferrer" aria-label="${escapeAttribute(
+        "Instagram " + (data.site.instagramLabel || "@koytchevivo")
+      )}">${instagramIconSvg()}</a>`
     );
   }
 
