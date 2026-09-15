@@ -232,7 +232,7 @@ function renderPage(data, page) {
   }
 
   if (page === "works") {
-    document.title = `Works - ${data.site.artistName}`;
+    document.title = "Works — Ivo Koytchev";
     root.innerHTML = renderWorksPage(data);
     return;
   }
@@ -255,13 +255,13 @@ function renderPage(data, page) {
   }
 
   if (page === "about") {
-    document.title = `About - ${data.site.artistName}`;
+    document.title = "About Ivo Koytchev, painter and muralist, Washington DC area";
     root.innerHTML = renderAboutPage(data);
     return;
   }
 
   if (page === "contact") {
-    document.title = `Contact - ${data.site.artistName}`;
+    document.title = "Contact Ivo Koytchev";
     root.innerHTML = renderContactPage(data);
     return;
   }
