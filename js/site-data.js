@@ -128,6 +128,18 @@ window.SITE_DATA = {
         "description": []
       },
       {
+        "slug": "portraits-14",
+        "title": "",
+        "image": "images/portraits/portraits-14.jpg",
+        "alt": "Portrait",
+        "year": "",
+        "medium": "",
+        "dimensions": "",
+        "price": "",
+        "featured": false,
+        "description": []
+      },
+      {
         "slug": "portraits-01",
         "title": "",
         "image": "images/portraits/portraits-01.jpg",
@@ -767,8 +779,8 @@ window.SITE_DATA = {
     "label": "About",
     "title": "Ivo Koytchev",
     "statement": "Born in Kazanlak, Bulgaria in 1970. Washington DC from 1998 to present.",
-    "portraitImage": "images/hero.jpg",
-    "portraitAlt": "Ivo Koytchev in the studio",
+    "portraitImage": "images/portraits/portraits-14.jpg",
+    "portraitAlt": "Ivo Koytchev",
     "biography": [
       "Art School / Kazanlak, Bulgaria — 1985 / 1989",
       "Bulgarian Air Force — 1989 / 1991",
@@ -828,7 +840,7 @@ window.SITE_DATA = {
       "Office of the US Trade Representative DC — wood graining doors"
     ],
     "portraitVariants": {
-      "current": "images/hero.jpg",
+      "current": "images/portraits/portraits-14.jpg",
       "p1": "images/profile1.jpg",
       "p2": "images/profile2.jpg"
     }
