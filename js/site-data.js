@@ -9,6 +9,8 @@ window.SITE_DATA = {
     "instagramUrl": "https://www.instagram.com/koytchevivo/",
     "instagramLabel": "@koytchevivo",
     "linkedInLabel": "LinkedIn",
+    "instagramUrl": "https://www.instagram.com/koytchevivo/",
+    "instagramLabel": "@koytchevivo",
     "footerNote": "Interior and exterior murals, portraits, decorative painting, faux finishes, gold leaf, wood graining and marbleising. Residential and commercial projects."
   },
   "hero": {
@@ -119,6 +121,18 @@ window.SITE_DATA = {
         "slug": "portraits-13",
         "title": "",
         "image": "images/portraits/portraits-13.jpg",
+        "alt": "Portrait",
+        "year": "",
+        "medium": "",
+        "dimensions": "",
+        "price": "",
+        "featured": false,
+        "description": []
+      },
+      {
+        "slug": "portraits-14",
+        "title": "",
+        "image": "images/portraits/portraits-14.jpg",
         "alt": "Portrait",
         "year": "",
         "medium": "",
@@ -767,8 +781,8 @@ window.SITE_DATA = {
     "label": "About",
     "title": "Ivo Koytchev",
     "statement": "Born in Kazanlak, Bulgaria in 1970. Washington DC from 1998 to present.",
-    "portraitImage": "images/hero.jpg",
-    "portraitAlt": "Ivo Koytchev in the studio",
+    "portraitImage": "images/portraits/portraits-14.jpg",
+    "portraitAlt": "Ivo Koytchev",
     "biography": [
       "Art School / Kazanlak, Bulgaria — 1985 / 1989",
       "Bulgarian Air Force — 1989 / 1991",
@@ -777,18 +791,25 @@ window.SITE_DATA = {
       "Interior and exterior murals, portraits, decorative painting, faux finishes, gold leaf, wood graining and marbleising. Residential and commercial projects."
     ],
     "awards": [
-      "2011, 2015, 2016, 2017 Washington Building Congress Craftsmanship Winner"
+      "Washington Building Congress / Craftsmanship Award Winner :",
+      "Army National Guard Readiness Center , Arlington VA 2012",
+      "Fairmont Ave Mural , Bethesda MD 2015",
+      "Renwick Gallery - Washington DC 2016",
+      "Smithsonian American Art Museum, Washington DC 2016",
+      "The Watergate Hotel, Washington DC 2017"
     ],
     "publications": [
-      "New York Times, Washington Post, Omaha News"
+      "New York Times 2007",
+      "Washington Post 2016",
+      "Omaha News 2018"
     ],
     "selectedResidential": [
-      "JFK House (Steve Case) McLean VA — faux finishes — 2008",
-      "Roman Abramovich House DC — faux finishes — 2010",
+      "JFK Residence McLean VA — faux finishes — 2008",
+      "Roman Abramovich Residence DC — faux finishes — 2010",
       "Ralph Lauren's Villa Homestead VA — faux finishes — 2011",
-      "Jeff Bezos House DC — foyer ceiling decoration — 2020",
-      "Krystal Koons House VA — murals — 2007",
-      "George Washington's House Mt Vernon VA — 2 large interior murals / visitors center — 2009",
+      "Jeff Bezos Residence DC — foyer ceiling decoration — 2020",
+      "Krystal Koons Residence VA — murals — 2007",
+      "George Washington's Residence Mt Vernon VA — 2 large interior murals / visitors center — 2009",
       "Frank Islam's Residence — 145' landscape Interior Mural — 2015",
       "Downtown Bethesda Exterior Mural — Fairmont Ave, Bethesda MD — 2016",
       "Elizabeth Taylor Exterior Mural — Q and 7th Str, NW Washington DC — 2017",
@@ -797,7 +818,7 @@ window.SITE_DATA = {
     "selectedCommercial": [
       "The White House / west wing — wood graining and door restoration",
       "Jams Restaurant Omaha NE — 12 paintings",
-      "Masonic Temple Omaha NE — gold leaf ceiling",
+      "Masonic Temple Omaha NE — gold leaf ceiling, large exterior mural",
       "Masonic Temple Strasburg PA — faux finishes / ornamental decoration",
       "FBI Building DC — faux finishes",
       "Serena Williams Tennis Center DC — outdoor mural",
@@ -808,9 +829,9 @@ window.SITE_DATA = {
       "Renwick Gallery DC — plaster renovation and gold leaf",
       "Carnegie Institute DC — wood graining",
       "Dino Hall Smithsonian Museum DC — trompe l'oeil doors imitation",
-      "Embassy of Cameroon — gold leaf",
-      "UAE Embassy — gold leaf",
-      "Embassy of Belgium — exterior wash technique",
+      "Embassy of Cameroon, Washington DC — gold leaf",
+      "UAE Embassy, Washington DC — gold leaf",
+      "Embassy of Belgium, Washington DC — exterior wash technique",
       "City Center DC — marmorino plaster",
       "Kaiser Permanente MD — wood graining",
       "NASA Goddard MD — lime plaster / columns",
@@ -821,7 +842,7 @@ window.SITE_DATA = {
       "Office of the US Trade Representative DC — wood graining doors"
     ],
     "portraitVariants": {
-      "current": "images/hero.jpg",
+      "current": "images/portraits/portraits-14.jpg",
       "p1": "images/profile1.jpg",
       "p2": "images/profile2.jpg"
     }
