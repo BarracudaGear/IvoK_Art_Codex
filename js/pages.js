@@ -436,6 +436,10 @@ function renderAboutExtraSections(data) {
     .join("");
 }
 
+function instagramIconSvg() {
+  return `<svg class="instagram-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="0.85" fill="currentColor" stroke="none"></circle></svg>`;
+}
+
 function renderContactPage(data) {
   const details = [];
 
@@ -455,9 +459,9 @@ function renderContactPage(data) {
 
   if (hasPublicUrl(data.site.instagramUrl) && data.site.instagramLabel) {
     details.push(
-      `<p><strong>Instagram:</strong> <a href="${escapeAttribute(data.site.instagramUrl)}" target="_blank" rel="noreferrer">${escapeHtml(
+      `<p class="contact-instagram"><a href="${escapeAttribute(data.site.instagramUrl)}" target="_blank" rel="noreferrer">${instagramIconSvg()}<span>${escapeHtml(
         data.site.instagramLabel
-      )}</a></p>`
+      )}</span></a></p>`
     );
   }
 
