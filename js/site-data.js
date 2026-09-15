@@ -8,7 +8,7 @@ window.SITE_DATA = {
     "location": "Centreville VA",
     "linkedInLabel": "LinkedIn",
     "instagramUrl": "https://www.instagram.com/koytchevivo/",
-    "instagramLabel": "Instagram",
+    "instagramLabel": "@koytchevivo",
     "footerNote": "Interior and exterior murals, portraits, decorative painting, faux finishes, gold leaf, wood graining and marbleising. Residential and commercial projects."
   },
   "hero": {
