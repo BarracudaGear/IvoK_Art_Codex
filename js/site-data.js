@@ -16,14 +16,14 @@ window.SITE_DATA = {
     "title": "Ivo Koytchev",
     "statement": "Interior and exterior murals, portraits, decorative painting, faux finishes, gold leaf, wood graining and marbleising. Residential and commercial projects.",
     "description": "",
-    "image": "images/hero.jpg",
+    "image": "images/profile2.jpg",
     "alt": "Ivo Koytchev artwork",
     "primaryCtaLabel": "View Works",
     "primaryCtaHref": "works.html",
     "secondaryCtaLabel": "Commissions",
     "secondaryCtaHref": "commissions.html",
     "variants": {
-      "current": "images/hero.jpg",
+      "current": "images/profile2.jpg",
       "p1": "images/profile1.jpg",
       "p2": "images/profile2.jpg"
     }
@@ -779,7 +779,7 @@ window.SITE_DATA = {
     "label": "About",
     "title": "Ivo Koytchev",
     "statement": "Born in Kazanlak, Bulgaria in 1970. Washington DC from 1998 to present.",
-    "portraitImage": "images/portraits/portraits-14.jpg",
+    "portraitImage": "images/profile2.jpg",
     "portraitAlt": "Ivo Koytchev",
     "biography": [
       "Art School / Kazanlak, Bulgaria — 1985 / 1989",
@@ -840,7 +840,7 @@ window.SITE_DATA = {
       "Office of the US Trade Representative DC — wood graining doors"
     ],
     "portraitVariants": {
-      "current": "images/portraits/portraits-14.jpg",
+      "current": "images/profile2.jpg",
       "p1": "images/profile1.jpg",
       "p2": "images/profile2.jpg"
     }
