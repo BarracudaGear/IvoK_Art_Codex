@@ -1,21 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://barracudagear.github.io/IvoK_Art_Codex/</loc>
-  </url>
-  <url>
-    <loc>https://barracudagear.github.io/IvoK_Art_Codex/about.html</loc>
-  </url>
-  <url>
-    <loc>https://barracudagear.github.io/IvoK_Art_Codex/works.html</loc>
-  </url>
-  <url>
-    <loc>https://barracudagear.github.io/IvoK_Art_Codex/contact.html</loc>
-  </url>
-  <url>
-    <loc>https://barracudagear.github.io/IvoK_Art_Codex/commissions.html</loc>
-  </url>
-  <url>
-    <loc>https://barracudagear.github.io/IvoK_Art_Codex/prints.html</loc>
-  </url>
+  <url><loc>https://ivokoytchev.art/</loc></url>
+  <url><loc>https://ivokoytchev.art/about.html</loc></url>
+  <url><loc>https://ivokoytchev.art/works.html</loc></url>
+  <url><loc>https://ivokoytchev.art/contact.html</loc></url>
+  <url><loc>https://ivokoytchev.art/commissions.html</loc></url>
+  <url><loc>https://ivokoytchev.art/prints.html</loc></url>
 </urlset>
