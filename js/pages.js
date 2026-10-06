@@ -171,7 +171,7 @@ function renderArtworkPage(data) {
                 createMailtoUrl(data.site.email, workInquirySubject(work), workInquiryLines(work))
               )}"
             >
-              Enquire About This Work
+              Inquire About This Work
             </a>`
     : `<a class="button" href="${escapeAttribute(siteHref("contact.html"))}">Contact for details</a>`;
 
