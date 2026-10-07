@@ -691,7 +691,7 @@ function workInquiryLines(work) {
   if (hasWorkTitle(work)) {
     lines.push(`Artwork: ${work.title}`);
   } else {
-    lines.push("I would like to enquire about this work.");
+    lines.push("I would like to inquire about this work.");
   }
 
   lines.push(`Category: ${work.categoryLabel}`);
@@ -700,7 +700,7 @@ function workInquiryLines(work) {
 
   if (hasWorkTitle(work)) {
     lines.push("");
-    lines.push("I would like to enquire about this work.");
+    lines.push("I would like to inquire about this work.");
   }
 
   return lines;
