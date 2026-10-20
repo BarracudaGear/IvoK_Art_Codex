@@ -311,6 +311,19 @@ window.SITE_DATA = {
         "featured": false,
         "description": [],
         "imageFit": "contain"
+      },
+      {
+        "slug": "landscapes-09",
+        "title": "",
+        "image": "images/landscapes/landscapes-09.jpg",
+        "alt": "Landscape",
+        "year": "",
+        "medium": "",
+        "dimensions": "",
+        "price": "",
+        "featured": false,
+        "description": [],
+        "imageFit": "contain"
       }
     ],
     "interior-murals": [
