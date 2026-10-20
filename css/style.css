@@ -653,6 +653,13 @@ code {
   color: rgba(28, 25, 23, 0.74);
 }
 
+.footer-credit {
+  font-family: "Jost", sans-serif;
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+  color: rgba(28, 25, 23, 0.55);
+}
+
 .footer-note {
   max-width: 36rem;
   color: rgba(28, 25, 23, 0.76);

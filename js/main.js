@@ -216,6 +216,7 @@ function renderFooter(data) {
       </div>
       <div class="footer-bottom">
         <p class="footer-meta">&copy; ${year} ${escapeHtml(data.site.artistName)}</p>
+        <p class="footer-credit">Powered by NS DataLabs</p>
       </div>
     </div>
   `;
